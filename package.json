@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "avalonbay-api": "^1.0.0",
+    "avalonbay-api": "^1.0.2",
     "express": "^4.17.1",
     "sqlite3": "^4.2.0"
   }
