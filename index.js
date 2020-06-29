@@ -8,6 +8,10 @@ const app = express();
 const port = process.env.PORT | 3001;
 
 app.use(cors());
+app.use((req, res, next) => {
+    console.log(req.url);
+    next();
+})
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
@@ -50,6 +54,7 @@ app.get('/communities', (req, res) => {
             res.send(400);
         }
         else {
+            rows.forEach(row => row.images = row.images.split(","))
             res.send({ communities: rows });
         }
     });
