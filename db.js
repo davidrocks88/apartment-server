@@ -22,12 +22,13 @@ Object.defineProperty(Array.prototype, 'chunk', {
     }
   });
 
-const communitySchema = ["community_id", "name", "city", "state", "address", "type", "url", "count"];
+const communitySchema = ["community_id", "name", "city", "state", "address", "type", "url", "count", "images"];
 const apartmentSchema = ["apartment_id", "community_id", "apartmentNumber", "apartmentAddress", "size", "beds", "baths", "floor"];
 const priceSchema = ["apartment_id", "price", "date"];
 const stateSchema = ["id", "name"];
 
 const insertCommunities = (db, communities) => {
+    communities.forEach(community => community.images = community.images.join(","))
     const communityPlaceholders = communities.map(() => `(${module.exports.communitySchema.map(() => "?").join(", ")})`).join(", ");
     const statement = `INSERT OR REPLACE INTO communities (${module.exports.communitySchema.join(", ")}) VALUES ${communityPlaceholders}`;
     const flattenedResponse = communities.map(c => Object.values(c)).flat();

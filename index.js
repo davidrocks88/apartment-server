@@ -1,13 +1,13 @@
 const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
-const fs = require('fs');
 const avalon = require('avalonbay-api');
 const dbUtil = require("./db.js");
+const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT | 3000;
+const port = process.env.PORT | 3001;
 
-
+app.use(cors());
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
@@ -27,7 +27,6 @@ process.on('exit', (code) => {
         }
     });
 })
-
 
 app.get('/communities/states/:state/update', async (req, res) => {
     const communities = await avalon.searchState(req.params.state);
